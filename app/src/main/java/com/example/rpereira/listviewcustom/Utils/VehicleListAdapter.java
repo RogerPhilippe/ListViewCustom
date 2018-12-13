@@ -9,8 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.rpereira.listviewcustom.MainActivity;
+import com.example.rpereira.listviewcustom.Model.Vehicle;
 import com.example.rpereira.listviewcustom.Model.Vehicles;
 import com.example.rpereira.listviewcustom.R;
 
@@ -43,6 +47,29 @@ public class VehicleListAdapter extends ArrayAdapter<Vehicles> {
 
         TextView model = (TextView) listItem.findViewById(R.id.idtvMainText);
         model.setText(currentVehicle.getModel());
+
+        CheckBox ckBox = (CheckBox) listItem.findViewById(R.id.idcbSelectIem);
+        ckBox.setChecked(currentVehicle.isChecked());
+        ckBox.setTag(currentVehicle);
+
+        ckBox.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                CheckBox checkBox = (CheckBox) v;
+
+                Vehicle vcl = (Vehicle) v.getTag();
+                vcl.setmChecked( ((CheckBox) v).isChecked());
+
+                if (checkBox.isChecked()) {
+                    Toast.makeText(mContext, "Selecionado: "+vcl.getModel(), Toast.LENGTH_SHORT);
+                } else {
+                    Toast.makeText(mContext, "Deselecionado: "+vcl.getModel(), Toast.LENGTH_SHORT);
+                }
+
+            }
+        });
 
         return listItem;
     }
