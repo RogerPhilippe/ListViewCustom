@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ListViewCustom</string>
     <string name="label_list_title">Lista de Veículos</string>
+    <string name="label_id_item">ID Item:</string>
 </resources>
