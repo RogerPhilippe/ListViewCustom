@@ -13,8 +13,6 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.rpereira.listviewcustom.MainActivity;
-import com.example.rpereira.listviewcustom.Model.Vehicle;
 import com.example.rpereira.listviewcustom.Model.Vehicles;
 import com.example.rpereira.listviewcustom.R;
 
@@ -25,6 +23,7 @@ public class VehicleListAdapter extends ArrayAdapter<Vehicles> {
 
     private Context mContext;
     private List<Vehicles> vehiclesList = new ArrayList<>();
+    private final List<Vehicles> idSelecionados = new ArrayList<>();
 
     @SuppressLint("SupportAnnotationUsage")
     public VehicleListAdapter(@NonNull Context context, @LayoutRes List<Vehicles> list) {
@@ -59,13 +58,27 @@ public class VehicleListAdapter extends ArrayAdapter<Vehicles> {
 
                 CheckBox checkBox = (CheckBox) v;
 
-                Vehicle vcl = (Vehicle) v.getTag();
-                vcl.setmChecked( ((CheckBox) v).isChecked());
+                Vehicles vcls = (Vehicles) v.getTag();
+                vcls.setmChecked(((CheckBox) v).isChecked());
 
+//                Vehicles vehicles = new Vehicles.Builder().setId(vcls.getId()).setBrand(vcls.getBrand())
+//                        .setModel(vcls.getModel()).setChecked(((CheckBox) v).isChecked()).build();
+
+                // Verifica se item está selecionado
                 if (checkBox.isChecked()) {
-                    Toast.makeText(mContext, "Selecionado: "+vcl.getModel(), Toast.LENGTH_SHORT);
+                    Toast.makeText(mContext, "Marcado: "+vcls.getModel(), Toast.LENGTH_SHORT).show();
+                    // Veriofica se lista possui item selecionado
+                    if(!idSelecionados.contains(vcls)) {
+                        // Adiciona
+                        idSelecionados.add(vcls);
+                    }
                 } else {
-                    Toast.makeText(mContext, "Deselecionado: "+vcl.getModel(), Toast.LENGTH_SHORT);
+                    Toast.makeText(mContext, "Desmarcado: "+vcls.getModel(), Toast.LENGTH_SHORT).show();
+                    // Veriofica se lista possui item selecionado
+                    if(idSelecionados.contains(vcls)) {
+                        // Remove
+                        idSelecionados.remove(vcls);
+                    }
                 }
 
             }
@@ -73,4 +86,9 @@ public class VehicleListAdapter extends ArrayAdapter<Vehicles> {
 
         return listItem;
     }
+
+    public List<Vehicles> getSelecionados() {
+        return idSelecionados;
+    }
+
 }
