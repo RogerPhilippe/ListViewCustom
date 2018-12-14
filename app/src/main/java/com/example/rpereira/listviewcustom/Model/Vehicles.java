@@ -46,18 +46,6 @@ public class Vehicles {
 
     }
 
-    public void setmId(int mId) {
-        this.mId = mId;
-    }
-
-    public void setmBrand(String mBrand) {
-        this.mBrand = mBrand;
-    }
-
-    public void setmModel(String mModel) {
-        this.mModel = mModel;
-    }
-
     public void setmChecked(boolean mChecked) {
         this.mChecked = mChecked;
     }

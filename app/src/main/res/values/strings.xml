@@ -3,4 +3,6 @@
     <string name="label_list_title">Lista de Veículos</string>
     <string name="label_id_item">ID Item:</string>
     <string name="btn_label_play">Play!</string>
+    <string name="btn_dialog_confirm">Confirmar</string>
+    <string name="label_dialog_count_selection">Qtd. Seleções:</string>
 </resources>

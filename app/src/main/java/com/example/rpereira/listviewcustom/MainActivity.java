@@ -1,10 +1,13 @@
 package com.example.rpereira.listviewcustom;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.rpereira.listviewcustom.Model.Vehicles;
 import com.example.rpereira.listviewcustom.Utils.VehicleListAdapter;
@@ -17,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView lvVehicles;
     private VehicleListAdapter vlAdapter;
     private Button btnPlay;
+
+    final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 vlAdapter.getSelecionados();
+
+                final Dialog dialog = new Dialog(context);
+                dialog.setContentView(R.layout.activity_custom_dialog);
+                dialog.setTitle("Seleções");
+
+                TextView dialogQtdSelects = (TextView) dialog.findViewById(R.id.idDialogQtdSelects);
+                dialogQtdSelects.setText("Qtd. Seleções: "+vlAdapter.getSelecionados().size()+" ");
+                Button btnDialogConfirm = (Button) dialog.findViewById(R.id.idDialogBtnConfirm);
+
+                btnDialogConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
 
             }
         });
